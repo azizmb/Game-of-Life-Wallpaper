@@ -1,6 +1,19 @@
-Python script to generate evolving wallpapers for Ubuntu that mutate based on the rules of Conways Game of Life.
+Python script to generate evolving wallpapers for Ubuntu that mutate based on the rules of Conways Game of Life. Comments and suggestions welcome.
 
-Very rough implementation, needs lots of cleanup and tuning. My first time doing anything in image processing/numpy so some things may be very inefficient.
+REQUIREMENTS:
+python
+PIL
+numpy
+
+Instructions:
+- Load the initial cell pattern in test.lif or in any other file (change the path in the config appropriately). 
+- There isnt a parser yet, so 1st line must be number of cols 2nd line must be number of rows. After that, every new line delimits a row. '.' specifies a blank cell and '*' specifies a live cell.
+- Change the resolution in config.py to the resolution of your screen, change the paths to appropriate paths on your computer and change any other settings you may want to.
+- Run gol.py
+- You could put it in your startup applications
+
+
+This is still a very rough implementation, needs lots of cleanup and tuning. My first time doing anything in image processing/numpy so some things may be very inefficient.
 
 The implementation of the Game of Life Simulation was taken mostly take from Dhananjay Nene's talk at inpycon2010
 http://in.pycon.org/2010/talks/66-functional-programming-with-python
