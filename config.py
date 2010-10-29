@@ -11,16 +11,16 @@ directory = "/home/aziz/Documents/game-of-life-wallpaper/gol"
 log_filename = '/home/aziz/Documents/game-of-life-wallpaper/gol.log'
 
 # contrast parameter passed to the enhancer.contrast function
-enhance = 15
+enhance = 3
 
 # number of iterations to perform 
-sample_rate = 5
+sample_rate = 20
 
 # colour to add the generated image with
 fill = "#97799b" # this is a purple close to the ubuntu purple
 
 # if true, will save all the image files generated, ie, will not overwrite
-save_all = True
+save_all = False
 
 # sleep interval
-interval = 0
+interval = 10

@@ -34,7 +34,7 @@ if __name__ == "__main__" :
                 filepath = os.path.join(config.directory, "%d.jpg"%board.step)
 
             img.save(filepath)
-            #commands.getstatusoutput("gconftool-2 -t str --set /desktop/gnome/background/picture_filename %s"%filepath)
+            commands.getstatusoutput("gconftool-2 -t str --set /desktop/gnome/background/picture_filename %s"%filepath)
             time.sleep(config.interval)
 
     except Exception as e:
