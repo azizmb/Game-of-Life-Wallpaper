@@ -39,7 +39,6 @@ class Board(object):
             if kwargs.has_key('filename'):
                 fname = kwargs.pop('filename')
                 f = open(fname,"r")
-                logging.debug("Opened file.")
                 self.cols = int(f.readline())
                 self.rows = int(f.readline())
                 yindex = 0

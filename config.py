@@ -20,7 +20,7 @@ sample_rate = 5
 fill = "#97799b" # this is a purple close to the ubuntu purple
 
 # if true, will save all the image files generated, ie, will not overwrite
-save_all = False
+save_all = True
 
 # sleep interval
-interval = 10
+interval = 0
