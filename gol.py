@@ -52,6 +52,13 @@ def generate_lifeforms():
     # load board from file
     board = Board(filename=config.life, rows=config.rows, cols=config.cols)
     
+    lifename = os.path.split(config.life)[1].split(".")[0]
+    
+    dirname = os.path.join(config.directory, lifename)
+    
+    if not os.path.isdir(dirname):
+        os.mkdir(dirname)
+    
     # generate image to add to the images
     img2 = Image.new('RGB', config.resolution)
     draw = ImageDraw.Draw(img2)
@@ -65,27 +72,33 @@ def generate_lifeforms():
         
         if config.binary_image:
             a = board.get_array()
+            scale_mode = Image.NEAREST
         else:
             a = distance_transform(board.get_array())
+            scale_mode = Image.ANTIALIAS
             
         img = scipy.misc.toimage(a)
         img = img.convert("RGB")
+        
         img = ImageOps.autocontrast(img)
         img = ImageChops.add (img, img2)
-        img = img.resize(config.resolution, Image.ANTIALIAS)
+        img = img.resize(config.resolution, scale_mode)
         
-        filepath = os.path.join(config.directory, "%d.png"%board.step)
+        filepath = os.path.join(dirname, "%d.png"%board.step)
         img.save(filepath)
 
 
 if __name__ == "__main__" :
     try:
+        if not os.path.isdir(config.directory):
+            os.mkdir(config.directory)
+        
         generate_lifeforms()
         
         wallpapers = list()
         for filename in os.listdir(config.directory):
             if filename[-4:]=='.png':
-                wallpapers.append(os.path.join(config.directory, filename))
+                wallpapers.append(filename)
             
         print "\nWriting XML."
         xml = write_xml(wallpapers)

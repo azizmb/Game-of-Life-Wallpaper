@@ -5,6 +5,7 @@ class Cell(object):
         self.neighbours = {}
         self.state = state
         self.marked = False
+        
     def set_neighbour(self,c):
         neighbour = self.neighbours.get((c.row,c.col),None)
         if not neighbour :

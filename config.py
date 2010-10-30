@@ -1,35 +1,39 @@
+import os
+
+# specify directory name so that remaning paths can be relative
+basedir = os.path.abspath(os.path.dirname(__file__))
+expandpath = lambda path: os.path.join(basedir, path)
+
 # file to read initial cell configuration
-life = "/home/aziz/Documents/game-of-life-wallpaper/patterns/bunnies_106.lif"
+life = expandpath("patterns/achimsp144_106.lif")
 
 # screen resolution
 resolution = (1260, 800)
 
 # board size
-rows = 150
-cols = 150
+rows = 25
+cols = 40
 
 # directory to store the wallpaper image
-directory = "/home/aziz/Documents/game-of-life-wallpaper/gol"
+directory = expandpath("demos")
 
-# when debugging
-log_filename = '/home/aziz/Documents/game-of-life-wallpaper/gol.log'
+# number of cycles after which image is saved
+sample_rate = 1
 
 # number of iterations to perform 
-sample_rate = 50
+steps = 144
 
 # colour to add the generated image with
 fill = "#97799b" # this is a purple close to the ubuntu purple
 
 # Type of image to be displayed
-binary_image = False
+binary_image = True
 
 # if true, will save all the image files generated, ie, will not overwrite
 save_all = False
 
 # sleep interval
-sleep_interval = 5
+sleep_interval = 2
 
 #transition interval
-transition_interval = 2
-
-steps = 17500
+transition_interval = 1
