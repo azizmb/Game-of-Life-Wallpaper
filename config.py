@@ -5,8 +5,9 @@ life = "/home/aziz/Documents/game-of-life-wallpaper/test.lif"
 resolution = (1260, 800)
 
 # board size
-rows = 150
-cols = 150
+rows = 200
+cols = 320
+
 # directory to store the wallpaper image
 directory = "/home/aziz/Documents/game-of-life-wallpaper/gol"
 
@@ -14,10 +15,10 @@ directory = "/home/aziz/Documents/game-of-life-wallpaper/gol"
 log_filename = '/home/aziz/Documents/game-of-life-wallpaper/gol.log'
 
 # contrast parameter passed to the enhancer.contrast function
-enhance = 0
+enhance = 1.5
 
 # number of iterations to perform 
-sample_rate = 5
+sample_rate = 50
 
 # colour to add the generated image with
 fill = "#97799b" # this is a purple close to the ubuntu purple
@@ -31,5 +32,5 @@ sleep_interval = 2
 #transition interval
 transition_interval = 2
 
-steps = 10000
+steps = 28786
 
