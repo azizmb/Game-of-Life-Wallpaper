@@ -34,26 +34,25 @@ class Board(object):
     def __init__(self, **kwargs):
         self.cells = []
         self.step = 0
-        
+        self.rows = kwargs.pop('rows')
+        self.cols = kwargs.pop('cols')
+                
         try:
             if kwargs.has_key('filename'):
                 fname = kwargs.pop('filename')
                 f = open(fname,"r")
-                self.cols = int(f.readline())
-                self.rows = int(f.readline())
                 yindex = 0
                 live = set()
                 line = f.readline()
                 while line!="":
-                    xindex = str.find(line, '*')
-                    while xindex != -1:
-                        live.add((xindex, yindex))
-                        xindex = str.find(line, '*', xindex+1)
-                    yindex += 1
                     line = f.readline()
+                    if line == "":
+                        break
+                    line = line.split()
+                    c = lambda a:(int(a[0])+(self.cols/2), int(a[1])+(self.rows/2))
+                    live.add(c(line))
+                    
             else:
-                self.rows = kwargs.pop('rows')
-                self.cols = kwargs.pop('cols')
                 live = kwargs.pop('live')
 
         except Exception as e:

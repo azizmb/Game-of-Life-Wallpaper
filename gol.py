@@ -35,7 +35,9 @@ def write_transition(from_path, to_path, duration=config.transition_interval):
 
 def write_xml(wallpapers):
     """Given a list of wallpaper filepaths, will output them to the correct xml format"""
-    wallpapers.sort()
+    
+    wallpapers.sort(key=lambda a: int(a.split('/')[-1].split('.')[0]))
+    
     result = ""
     result += START_TIME
     for i in xrange(len(wallpapers) - 1):
@@ -48,7 +50,8 @@ def write_xml(wallpapers):
 
 def generate_lifeforms():
     # load board from file
-    board = Board(filename=config.life)
+    board = Board(filename=config.life, rows=config.rows, cols=config.cols)
+    
     # generate image to add to the images
     img2 = Image.new('RGB', config.resolution)
     draw = ImageDraw.Draw(img2)
@@ -68,7 +71,7 @@ def generate_lifeforms():
         img = ImageChops.add (img, img2)
         img = img.resize(config.resolution, Image.ANTIALIAS)
 
-        filepath = os.path.join(config.directory, "step-%d.png"%board.step)
+        filepath = os.path.join(config.directory, "%d.png"%board.step)
         img.save(filepath)
 
 
