@@ -7,7 +7,7 @@ numpy
 
 Instructions:
 - Load the initial cell pattern in test.lif or in any other file (change the path in the config appropriately). 
-- There isnt a parser yet, so 1st line must be number of cols 2nd line must be number of rows. After that, every new line delimits a row. '.' specifies a blank cell and '*' specifies a live cell.
+- The file must be a LIF 1.06 file.
 - Change the resolution in config.py to the resolution of your screen, change the paths to appropriate paths on your computer and change any other settings you may want to.
 - Run gol.py
 - Set the generated xml as your wallpaper.

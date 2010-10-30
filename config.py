@@ -17,7 +17,7 @@ log_filename = '/home/aziz/Documents/game-of-life-wallpaper/gol.log'
 enhance = 0
 
 # number of iterations to perform 
-sample_rate = 20
+sample_rate = 5
 
 # colour to add the generated image with
 fill = "#97799b" # this is a purple close to the ubuntu purple
