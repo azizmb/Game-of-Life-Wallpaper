@@ -10,7 +10,7 @@ Instructions:
 - There isnt a parser yet, so 1st line must be number of cols 2nd line must be number of rows. After that, every new line delimits a row. '.' specifies a blank cell and '*' specifies a live cell.
 - Change the resolution in config.py to the resolution of your screen, change the paths to appropriate paths on your computer and change any other settings you may want to.
 - Run gol.py
-- You could put it in your startup applications
+- Set the generated xml as your wallpaper.
 
 
 This is still a very rough implementation, needs lots of cleanup and tuning. My first time doing anything in image processing/numpy so some things may be very inefficient.
