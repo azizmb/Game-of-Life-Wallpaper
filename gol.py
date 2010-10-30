@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys
 import time, os, commands
-import pylab, numpy, Image, ImageDraw, ImageChops, ImageEnhance
+import pylab, numpy, scipy, Image, ImageDraw, ImageChops, ImageEnhance, ImageOps, ImageFilter
 from os import path
 
 import config
@@ -61,16 +61,19 @@ def generate_lifeforms():
 
     while board.step < config.steps:
         print ".",
-        board.execute(config.sample_rate)
-        a = distance_transform(board.get_array())
-
-        img = Image.fromarray(a).convert('RGB')
-        if config.enhance:
-            enh = ImageEnhance.Contrast(img)
-            img = enh.enhance(config.enhance)
+        board.execute(config.sample_rate)    
+        
+        if config.binary_image:
+            a = board.get_array()
+        else:
+            a = distance_transform(board.get_array())
+            
+        img = scipy.misc.toimage(a)
+        img = img.convert("RGB")
+        img = ImageOps.autocontrast(img)
         img = ImageChops.add (img, img2)
         img = img.resize(config.resolution, Image.ANTIALIAS)
-
+        
         filepath = os.path.join(config.directory, "%d.png"%board.step)
         img.save(filepath)
 
