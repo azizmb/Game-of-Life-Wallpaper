@@ -47,36 +47,41 @@ def write_xml(wallpapers, dirname):
     result += write_transition(wallpapers[-1], wallpapers[0])
     return """<background>%s</background>""" % (result)
 
-
+def get_overlay_image (resolution):
+    img2 = Image.new('RGB', config.resolution)
+    draw = ImageDraw.Draw(img2)
+    draw.rectangle(((0,0), img2.size), fill=config.fill, outline=config.fill)
+    return img2
+    
+def generate_image (array, resolution):
+    if config.binary_image:
+        scale_mode = Image.NEAREST
+    else:
+        array = distance_transform(array)
+        scale_mode = Image.ANTIALIAS
+        
+    img = scipy.misc.toimage(array)
+    img = img.convert("RGB")
+    
+    img2 = get_overlay_image(resolution)
+    
+    img = ImageOps.autocontrast(img)
+    img = ImageChops.add (img, img2)
+    img = img.resize(resolution, scale_mode)
+    return img
+            
 def generate_lifeforms(dirname):
     # load board from file
     board = Board(filename=config.life, rows=config.rows, cols=config.cols)
     
     # generate image to add to the images
-    img2 = Image.new('RGB', config.resolution)
-    draw = ImageDraw.Draw(img2)
-    draw.rectangle(((0,0), img2.size), fill=config.fill, outline=config.fill)
-
     print "Generating life images. Please be patient, this may take a while.\n"
 
     while board.step < config.steps:
         print ".",
-        board.execute(config.sample_rate)    
+        board.execute(config.sample_rate) 
         
-        if config.binary_image:
-            a = board.get_array()
-            scale_mode = Image.NEAREST
-        else:
-            a = distance_transform(board.get_array())
-            scale_mode = Image.ANTIALIAS
-            
-        img = scipy.misc.toimage(a)
-        img = img.convert("RGB")
-        
-        img = ImageOps.autocontrast(img)
-        img = ImageChops.add (img, img2)
-        img = img.resize(config.resolution, scale_mode)
-        
+        img = generate_image(board.get_array(), board.get_size())
         filepath = os.path.join(dirname, "%d.png"%board.step)
         img.save(filepath)
 
