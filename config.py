@@ -11,7 +11,7 @@ directory = "/home/aziz/Documents/game-of-life-wallpaper/gol"
 log_filename = '/home/aziz/Documents/game-of-life-wallpaper/gol.log'
 
 # contrast parameter passed to the enhancer.contrast function
-enhance = 3
+enhance = 5
 
 # number of iterations to perform 
 sample_rate = 20
@@ -23,4 +23,10 @@ fill = "#97799b" # this is a purple close to the ubuntu purple
 save_all = False
 
 # sleep interval
-interval = 10
+sleep_interval = 3
+
+#transition interval
+transition_interval = 2
+
+steps = 1000
+
