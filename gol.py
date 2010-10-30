@@ -33,11 +33,11 @@ def write_transition(from_path, to_path, duration=config.transition_interval):
 		<to>%s</to>
 	</transition>""" % (duration, from_path, to_path)
 
-def write_xml(wallpapers):
+def write_xml(wallpapers, dirname):
     """Given a list of wallpaper filepaths, will output them to the correct xml format"""
     
-    wallpapers.sort(key=lambda a: int(a.split('/')[-1].split('.')[0]))
-    
+    wallpapers.sort(key=lambda a: int(a.split('.')[0]))
+    wallpapers = [os.path.join(dirname, w) for w in wallpapers]
     result = ""
     result += START_TIME
     for i in xrange(len(wallpapers) - 1):
@@ -48,16 +48,9 @@ def write_xml(wallpapers):
     return """<background>%s</background>""" % (result)
 
 
-def generate_lifeforms():
+def generate_lifeforms(dirname):
     # load board from file
     board = Board(filename=config.life, rows=config.rows, cols=config.cols)
-    
-    lifename = os.path.split(config.life)[1].split(".")[0]
-    
-    dirname = os.path.join(config.directory, lifename)
-    
-    if not os.path.isdir(dirname):
-        os.mkdir(dirname)
     
     # generate image to add to the images
     img2 = Image.new('RGB', config.resolution)
@@ -93,21 +86,28 @@ if __name__ == "__main__" :
         if not os.path.isdir(config.directory):
             os.mkdir(config.directory)
         
-        generate_lifeforms()
+        lifename = os.path.split(config.life)[1].split(".")[0]
+        dirname = os.path.join(config.directory, lifename)
+        
+        if not os.path.isdir(dirname):
+            os.mkdir(dirname)
+        
+        generate_lifeforms(dirname)
         
         wallpapers = list()
-        for filename in os.listdir(config.directory):
+        for filename in os.listdir(dirname):
             if filename[-4:]=='.png':
                 wallpapers.append(filename)
             
         print "\nWriting XML."
-        xml = write_xml(wallpapers)
+        xml = write_xml(wallpapers, dirname)
         
-        f = file(os.path.join(config.directory, "game-of-life.xml"), 'w')
+        xmlfile = os.path.join(dirname, "%s.xml"%lifename)
+        f = file(xmlfile, 'w')
         f.write(xml)
         f.close()
         
-        print "Done! You can now set the wallpaper by selecting '%s/game-of-life.xml' as the wallpaper."%config.directory
+        print "Done! You can now set the wallpaper by selecting '%s' as the wallpaper."%xmlfile
             
     except Exception as e:
         print e

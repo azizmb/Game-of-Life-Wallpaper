@@ -27,7 +27,7 @@ steps = 144
 fill = "#97799b" # this is a purple close to the ubuntu purple
 
 # Type of image to be displayed
-binary_image = True
+binary_image = False
 
 # if true, will save all the image files generated, ie, will not overwrite
 save_all = False
