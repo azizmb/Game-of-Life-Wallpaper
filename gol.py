@@ -60,10 +60,14 @@ def generate_lifeforms(dirname):
         for manipulate in config.array_manipulators:
             array = manipulate[0](array, **manipulate[1])
         
-        img = scipy.misc.toimage(array)
+        
+        if config.array_manipulators == ():
+			img = scipy.misc.toimage(array)
+        else:
+            img = Image.fromarray(array)
         
         for manipulate in config.image_manipulators:
-            img = manipulate[0](img, **manipulate[1])      
+            img = manipulate[0](img, **manipulate[1])
         
         filepath = os.path.join(dirname, "%d.png"%board.step)
         img.save(filepath)
