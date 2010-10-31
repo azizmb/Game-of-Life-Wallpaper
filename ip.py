@@ -1,5 +1,4 @@
 import scipy, numpy, Image, ImageDraw, ImageChops, ImageEnhance, ImageOps, ImageFilter
-import config
 
 def _upscan(f):
     for i, fi in enumerate(f):

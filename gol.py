@@ -60,7 +60,6 @@ def generate_lifeforms(dirname):
         for manipulate in config.array_manipulators:
             array = manipulate[0](array, **manipulate[1])
         
-        
         if config.array_manipulators == ():
 			img = scipy.misc.toimage(array)
         else:
