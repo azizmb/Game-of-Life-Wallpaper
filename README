@@ -4,6 +4,7 @@ REQUIREMENTS:
 python
 PIL
 numpy
+scipy
 
 Instructions:
 - Load the initial cell pattern in test.lif or in any other file (change the path in the config appropriately). 
@@ -23,5 +24,6 @@ http://www.logarithmic.net/pfh/blog/01185880752
 
 
 TO-DO:
-- Write a parser for .lif files so loading of initial cell configuration becomes easier.
+- [DONE] Write a parser for .lif files so loading of initial cell configuration becomes easier.
 - Figure out how to amplify the colour variations
+- Optimise the simulation

@@ -1,12 +1,10 @@
 #!/usr/bin/python
-import sys
-import time, os, commands
-import pylab, numpy, scipy, Image, ImageDraw, ImageChops, ImageEnhance, ImageOps, ImageFilter
-from os import path
+import sys, time, os, commands
+import numpy, scipy, Image
 
 import config
 from engine import Board
-from distance import distance_transform
+from ip import *
 
 START_TIME = """<starttime>
     <year>2009</year>
@@ -46,29 +44,6 @@ def write_xml(wallpapers, dirname):
     result += write_static(wallpapers[len(wallpapers) - 1])
     result += write_transition(wallpapers[-1], wallpapers[0])
     return """<background>%s</background>""" % (result)
-
-def get_overlay_image (resolution):
-    img2 = Image.new('RGB', config.resolution)
-    draw = ImageDraw.Draw(img2)
-    draw.rectangle(((0,0), img2.size), fill=config.fill, outline=config.fill)
-    return img2
-    
-def generate_image (array, resolution):
-    if config.binary_image:
-        scale_mode = Image.NEAREST
-    else:
-        array = distance_transform(array)
-        scale_mode = Image.ANTIALIAS
-        
-    img = scipy.misc.toimage(array)
-    img = img.convert("RGB")
-    
-    img2 = get_overlay_image(resolution)
-    
-    img = ImageOps.autocontrast(img)
-    img = ImageChops.add (img, img2)
-    img = img.resize(resolution, scale_mode)
-    return img
             
 def generate_lifeforms(dirname):
     # load board from file
