@@ -56,7 +56,15 @@ def generate_lifeforms(dirname):
         print ".",
         board.execute(config.sample_rate) 
         
-        img = generate_image(board.get_array(), board.get_size())
+        array = board.get_array()
+        for manipulate in config.array_manipulators:
+            array = manipulate[0](array, **manipulate[1])
+        
+        img = scipy.misc.toimage(array)
+        
+        for manipulate in config.image_manipulators:
+            img = manipulate[0](img, **manipulate[1])      
+        
         filepath = os.path.join(dirname, "%d.png"%board.step)
         img.save(filepath)
 

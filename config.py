@@ -1,4 +1,6 @@
 import os
+import ip
+import Image
 
 # specify directory name so that remaning paths can be relative
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -23,17 +25,34 @@ sample_rate = 1
 # number of iterations to perform 
 steps = 144
 
-# colour to add the generated image with
-fill = "#97799b" # this is a purple close to the ubuntu purple
-
-# Type of image to be displayed
-binary_image = False
-
-# if true, will save all the image files generated, ie, will not overwrite
-save_all = False
-
 # sleep interval
 sleep_interval = 2
 
-#transition interval
+# transition interval
 transition_interval = 1
+
+
+### ADVANCED ###
+# Bellow are the hooks to further customise the image generation.
+# Format for specifying functions: ((func1, argumentDict1), (func2, argumentDict2))
+
+# Functions that will manipulate the array before generating the image.
+# Currently available are: 
+# ip.distance_transform : this performs a eucledean distance transform over the matrix
+array_manipulators = (
+    (ip.distance_transform, {}),
+)
+
+# Functions that will manipulate the image generated from the array.
+# Currently available functions are:
+# ip.add_solid : Performs addition of the generated image with the solid colour specified
+#                as an argument.
+# ip.enhance : Implementation ImageEnhance module
+# ImageOps.autocontrast : Implementation of colour from ImageEnhance module
+image_manipulators = (
+    # its a good idea not to skip the first two
+    (ip.resize, {'size':resolution, 'mode':Image.ANTIALIAS}),
+    (Image.Image.convert, {'mode':'RGB'}),
+    (ip.enhance_contrast, {'contrast': 1.1}),	
+    (ip.add_solid, {'colour': "#97799b"}),
+)
