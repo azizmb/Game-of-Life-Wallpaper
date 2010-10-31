@@ -40,6 +40,7 @@ transition_interval = 1
 # Currently available are: 
 # ip.distance_transform : this performs a eucledean distance transform over the matrix
 array_manipulators = (
+    # Commenting this will give you binary images
     (ip.distance_transform, {}),
 )
 
@@ -51,8 +52,8 @@ array_manipulators = (
 # ImageOps.autocontrast : Implementation of colour from ImageEnhance module
 image_manipulators = (
     # its a good idea not to skip the first two
-    (ip.resize, {'size':resolution, 'mode':Image.ANTIALIAS}),
     (Image.Image.convert, {'mode':'RGB'}),
-    (ip.enhance_contrast, {'contrast': 1.1}),	
+    (ip.enhance_contrast, {'contrast': 5}),	
+    (ip.resize, {'size':resolution, 'mode':Image.ANTIALIAS}),
     (ip.add_solid, {'colour': "#97799b"}),
 )
