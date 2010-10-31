@@ -48,10 +48,11 @@ array_manipulators = (
 # Currently available functions are:
 # ip.add_solid : Performs addition of the generated image with the solid colour specified
 #                as an argument.
-# ip.enhance : Implementation ImageEnhance module
+# ip.enhance_contrast : Implementation ImageEnhance modules contrast function
 # ImageOps.autocontrast : Implementation of colour from ImageEnhance module
 image_manipulators = (
-    # its a good idea not to skip the first two
+    # its a good idea not to omit the convert and resize functions unless you are writing
+    # your own 
     (Image.Image.convert, {'mode':'RGB'}),
     (ip.enhance_contrast, {'contrast': 5}),	
     (ip.resize, {'size':resolution, 'mode':Image.ANTIALIAS}),
