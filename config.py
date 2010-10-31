@@ -54,7 +54,7 @@ image_manipulators = (
     # its a good idea not to omit the convert and resize functions unless you are writing
     # your own 
     (Image.Image.convert, {'mode':'RGB'}),
-    (ip.enhance_contrast, {'contrast': 5}),	
+    (ip.enhance_contrast, {'contrast': 12}),	
     (ip.resize, {'size':resolution, 'mode':Image.ANTIALIAS}),
     (ip.add_solid, {'colour': "#97799b"}),
 )
